@@ -1,0 +1,39 @@
+package sequences;
+
+import java.util.ArrayList;
+
+public class Fibonacci extends Sequence {
+    int[] initialVal=new int[2];
+
+    public Fibonacci() {
+        this(0, 1);
+    }
+
+    public Fibonacci(int f0, int f1) {
+        super("Fibonacci (f0=" + f0 + ", f1=" + f1 + ")");
+        initialVal[0]=f0;
+        initialVal[1]=f1;
+        initializeSequence();
+    }
+
+    @Override
+    void initializeSequence() {
+        int i = 0;
+        int f;
+        while ((f = Fibonacci(i, sequence)) <= MAX) {
+            sequence.add(f);
+            i++;
+        }
+    }
+
+    private int Fibonacci(int n, ArrayList<Integer> fib) {
+        if (n < fib.size()) {
+            return fib.get(n);
+        }
+        if (n <= 1) {
+            return initialVal[n];
+        } else {
+            return Fibonacci(n - 1, fib) + Fibonacci(n - 2, fib);
+        }
+    }
+}
