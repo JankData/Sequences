@@ -20,7 +20,7 @@ public class Fibonacci extends Sequence {
     void initializeSequence() {
         int i = 0;
         int f;
-        while ((f = Fibonacci(i, sequence)) <= MAX) {
+        while ((f = Fibonacci(i, sequence)) <= max) {
             sequence.add(f);
             i++;
         }

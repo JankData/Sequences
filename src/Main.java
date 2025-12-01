@@ -1,3 +1,4 @@
+import exceptions.CantDecomposeException;
 import sequences.*;
 
 import java.util.ArrayList;
@@ -17,14 +18,24 @@ public class Main {
         sq=new Squares();
         printerStdOut.print(sq);
         printerFile.print(sq);
-
+        try{
+            System.out.println(sq.decompose(500));
+        } catch (CantDecomposeException ex) {
+            System.out.println(ex.getMessage());
+        }
         //Primes
         sq=new Primes();
         printerStdOut.print(sq);
         printerFile.print(sq);
+        try{
+            System.out.println(sq.decompose(500));
+        } catch (CantDecomposeException ex){
+            System.out.println(ex.getMessage());
+        }
 
-        //Fibonacci numbers starting with (-3,2)
+        //Fibonacci numbers starting with (1,5)
         sq=new Fibonacci(1,5);
+        sq.setMax(999999999);
         printerStdOut.print(sq);
         printerFile.print(sq);
     }
