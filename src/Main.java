@@ -43,5 +43,13 @@ public class Main {
         sq.setMax(10000);
         //printerStdOut.print(sq);
         printerFile.print(sq);
+        // Arithmetic sequence
+        sq=new Arithmetic(3,5);
+        printerFile.print(sq);
+        try {
+            System.out.println(sq.sum(3));
+        } catch (OutOfBoundsException ex){
+            System.out.println(ex.getMessage());
+        }
     }
 }
