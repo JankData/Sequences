@@ -1,6 +1,7 @@
 package sequences;
 
 import exceptions.CantDecomposeException;
+import exceptions.OutOfBoundsException;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,6 +28,17 @@ abstract public class Sequence {
     }
     public ArrayList<Integer> getSequence() {
         return sequence;
+    }
+
+    public int sum(int n) throws OutOfBoundsException{
+        if (n>sequence.size()){
+            throw new OutOfBoundsException("In "+name,n,max);
+        }
+        int s=0;
+        for (int i=0;i<n;i++){
+            s+=sequence.get(i);
+        }
+        return s;
     }
 
     public ArrayList<Integer> decompose(int n) throws CantDecomposeException {
