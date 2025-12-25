@@ -9,9 +9,18 @@ abstract public class Printer {
 
     private final int MAX_IN_LINE = 15;
 
-    public void print(Sequence sq) {
+    private int getNumberOfDigits(int n) {
+        int nd = 0;
+        while (n > 0) {
+            nd++;
+            n = (n - n % 10) / 10;
+        }
+        return nd;
+    }
+
+    public String print(Sequence sq) {
         String out = "---- " + sq.getName() + " ----\n";
-        ArrayList<Integer> list=sq.getSequence();
+        ArrayList<Integer> list = sq.getSequence();
         int maxNoDigits = getNumberOfDigits(Collections.max(list));
         for (int i = 0; i < list.size(); i++) {
             for (int j = 0; j < maxNoDigits - getNumberOfDigits(list.get(i)); j++) {
@@ -27,15 +36,7 @@ abstract public class Printer {
         out = out.substring(0, out.length() - 1);
         out += "\n";
         output(out);
-    }
-
-    private int getNumberOfDigits(int n) {
-        int nd = 0;
-        while (n > 0) {
-            nd++;
-            n = (n - n % 10) / 10;
-        }
-        return nd;
+        return out;
     }
 
     protected abstract void output(String str);

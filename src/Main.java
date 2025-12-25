@@ -6,13 +6,14 @@ import exceptions.OutOfBoundsException;
 import gui.MainFrame;
 import sequences.*;
 
+
 public class Main {
 
     public static void main(String[] args) {
         MainFrame mainFrame=new MainFrame();
         mainFrame.setVisible(true);
 
-        Printer printerFile = new PrinterFile("sequences.txt");
+/*        Printer printerFile = new PrinterFile("sequences.txt");
         Printer printerStdOut = new PrinterStdOut();
         //Integers
         Sequence sq = new Integers();
@@ -32,9 +33,9 @@ public class Main {
         //printerStdOut.print(sq);
         printerFile.print(sq);
         try {
-            System.out.println(sq.sum(3));
-            System.out.println(sq.decompose(206));
             System.out.println(sq.decompose(500));
+            System.out.println(sq.sum(3000));
+            System.out.println(sq.decompose(206));
         } catch (OutOfBoundsException | CantDecomposeException ex) {
             System.out.println(ex.getMessage());
         }
@@ -48,13 +49,14 @@ public class Main {
         sq.setMax(10000);
         //printerStdOut.print(sq);
         printerFile.print(sq);
-        // Arithmetic sequence
-        sq=new Arithmetic(3,5);
+        // Arithmetic Sequence
+        sq = new Arithmetic(3, 5);
         printerFile.print(sq);
         try {
             System.out.println(sq.sum(3));
-        } catch (OutOfBoundsException ex){
+        } catch (OutOfBoundsException ex) {
             System.out.println(ex.getMessage());
         }
+        //TODO: arithmetic & geometric sequences .....*/
     }
 }
