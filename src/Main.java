@@ -6,7 +6,6 @@ import exceptions.OutOfBoundsException;
 import gui.MainFrame;
 import sequences.*;
 
-
 public class Main {
 
     public static void main(String[] args) {
