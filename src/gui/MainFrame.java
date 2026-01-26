@@ -2,12 +2,14 @@ package gui;
 
 import Printers.Printer;
 import Printers.PrinterDummy;
+import exceptions.CantDecomposeException;
 import sequences.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLOutput;
 
 @SuppressWarnings("FieldCanBeLocal")
 public class MainFrame extends JFrame {
@@ -48,6 +50,7 @@ public class MainFrame extends JFrame {
         changeButton.addActionListener(this::changeMaxAction);
         resetButton.addActionListener(this::resetAction);
         showElementsButton.addActionListener(this::showElementsAction);
+        decomposeButton.addActionListener(this::decomposeAction);
     }
 
     private void initLook() {
@@ -104,6 +107,16 @@ public class MainFrame extends JFrame {
 //        sequenceLabel.setEnabled(!lock);
     }
 
+    private Integer getIntFromUser(String info){
+        String str= JOptionPane.showInputDialog(this,info, "Input value",JOptionPane.INFORMATION_MESSAGE);
+        try{
+            return Integer.parseInt(str);
+        } catch(NumberFormatException ex){
+            showError("String "+str+"cannot be converted to int");
+            return null;
+        }
+    }
+
     private void updateMaxInfo() {
         String str = (sq == null ? "---" : Integer.toString(sq.getMax()));
         maxLabel.setText(str);
@@ -118,6 +131,18 @@ public class MainFrame extends JFrame {
     }
 
     // ---------- Actions -------------//
+
+    private void decomposeAction(ActionEvent e){
+        Integer n= getIntFromUser("Please provide a number to decompose");
+        if (n!=null){
+            try{
+                TextWindow dialog=new TextWindow("Decomposition", printer.printDecomposition(n,sq.decompose(n)));
+                dialog.setVisible(true);
+            } catch (CantDecomposeException ex) {
+                showError("Cannot decompose: "+n);
+            }
+        }
+    }
 
     private void showElementsAction(ActionEvent e){
         TextWindow dialog=new TextWindow("Sequence elements",printer.print(sq));
