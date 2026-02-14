@@ -56,6 +56,6 @@ public class Main {
         } catch (OutOfBoundsException ex) {
             System.out.println(ex.getMessage());
         }
-        //TODO: arithmetic & geometric sequences .....*/
+*/
     }
 }

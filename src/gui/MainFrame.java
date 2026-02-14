@@ -11,6 +11,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLOutput;
 
+import java.io.*;
+import javax.swing.JFileChooser;
+import exceptions.OutOfBoundsException;
+
 @SuppressWarnings("FieldCanBeLocal")
 public class MainFrame extends JFrame {
     private JPanel outerPanel;
@@ -51,6 +55,8 @@ public class MainFrame extends JFrame {
         resetButton.addActionListener(this::resetAction);
         showElementsButton.addActionListener(this::showElementsAction);
         decomposeButton.addActionListener(this::decomposeAction);
+        sumButton.addActionListener(this::sumAction);
+        saveToFileButton.addActionListener(this::saveToFileAction);
     }
 
     private void initLook() {
@@ -182,4 +188,30 @@ public class MainFrame extends JFrame {
     private final ActionListener quitAction = e -> {
         this.dispose();
     };
+
+    private void sumAction(ActionEvent e) {
+        Integer n = getIntFromUser("How many elements to sum?");
+        if (n != null) {
+            try {
+                int result = sq.sum(n);
+                JOptionPane.showMessageDialog(this, "Sum of first " + n + " elements is: " + result);
+            } catch (OutOfBoundsException ex) {
+                showError("Cannot sum " + n + " elements. " + ex.getMessage());
+            }
+        }
+    }
+
+    private void saveToFileAction(ActionEvent e) {
+        JFileChooser fileChooser = new JFileChooser();
+        if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                String content = printer.print(sq);
+                writer.write(content);
+                JOptionPane.showMessageDialog(this, "File saved successfully!");
+            } catch (IOException ex) {
+                showError("Error saving file: " + ex.getMessage());
+            }
+        }
+    }
 }
